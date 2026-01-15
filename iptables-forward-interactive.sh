@@ -65,12 +65,7 @@ esac
 echo
 echo "[*] 解析目标地址..."
 
-TARGET_IP=$(
-  getent hosts "$TARGET_HOST" \
-  | awk '{print $1}' \
-  | grep -v ':' \
-  | head -n1
-)
+TARGET_IP=$(getent ahostsv4 "$TARGET_HOST" | awk '{print $1}' | grep -v ':' | head -n1)
 
 if [ -z "$TARGET_IP" ]; then
   echo "[!] No IPv4 address found for $TARGET_HOST"
