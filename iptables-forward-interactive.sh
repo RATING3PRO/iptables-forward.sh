@@ -1,4 +1,11 @@
-#!/bin/sh
+#!/bin/bash
+
+if [ -z "$FORCE_TTY_FIXED" ]; then
+  if [ ! -t 0 ] && [ -r /dev/tty ]; then
+    export FORCE_TTY_FIXED=1
+    exec </dev/tty
+  fi
+fi
 
 set -e
 
